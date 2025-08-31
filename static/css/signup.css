@@ -1,0 +1,75 @@
+body {
+            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f7f4;
+        }
+
+        .container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+             color: #4f46e5;
+            margin-bottom: 0.5rem;
+        }
+        .subtext {
+            font-size: 0.9rem;
+             color: #4f46e5;
+            margin-bottom: 1.5rem;
+        }
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        button {
+            width: 100%;
+            color: white;
+            background-color: #4f46e5;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        button:hover {
+             color: white;
+        }
+        .link {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .link a {
+             color: #4f46e5;
+            font-weight: bold;
+        }
+        .link a:hover {
+            text-decoration: underline;
+        }
+        .terms {
+            font-size: 0.8rem;
+             color: #4f46e5;
+            margin-top: 1rem;
+        }
+        .terms a {
+             color: #4f46e5;
+        }
+        .terms a:hover {
+            text-decoration: underline;
+        }

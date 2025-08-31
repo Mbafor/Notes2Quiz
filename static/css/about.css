@@ -1,0 +1,322 @@
+/* ==== GLOBAL STYLES ==== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+
+/* ==== HEADER ==== */
+.header {
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    text-decoration: none;
+    margin-left: 50px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin-right: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #007bff;
+}
+
+/* ==== HERO SECTION ==== */
+.hero {
+    position: relative;
+    background: url('/static/images/R.jpeg') no-repeat center center/cover;
+    height: 400px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(37,99,235,0.12);
+    border-radius: 0 0 32px 32px;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(120deg, rgba(0,0,0,0.55) 0%, rgba(37,99,235,0.25) 100%);
+    z-index: 0;
+}
+
+.hero h1, .hero p {
+    position: relative;
+    z-index: 1;
+    margin: 0 20px;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.18);
+}
+
+.hero p {
+    font-size: 1.25rem;
+    max-width: 700px;
+    margin-bottom: 0;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.12);
+}
+
+/* ==== CONTENT SECTION ==== */
+.content {
+    max-width: 1100px;
+    margin: 48px auto;
+    padding: 0 24px;
+}
+
+.section-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 36px 38px;
+    margin-bottom: 38px;
+    box-shadow: 0 6px 24px rgba(37,99,235,0.08);
+    transition: transform 0.22s cubic-bezier(.4,2,.3,.7), box-shadow 0.22s;
+    border-left: 6px solid #2563eb;
+    position: relative;
+}
+
+.section-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 18px 40px rgba(37,99,235,0.16);
+    border-left: 6px solid #007bff;
+}
+
+.section-card h2 {
+    color: #2563eb;
+    margin-bottom: 18px;
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    padding-left: 12px;
+    border-left: 4px solid #007bff;
+    background: linear-gradient(90deg, #e3f2fd 0%, #fff 100%);
+    border-radius: 0 8px 8px 0;
+}
+
+.section-card p {
+    color: #222;
+    line-height: 1.7;
+    margin-bottom: 14px;
+    font-size: 1.08rem;
+}
+
+ul {
+    margin-top: 12px;
+    padding-left: 24px;
+}
+
+ul li {
+    margin-bottom: 10px;
+    color: #2563eb;
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+}
+
+/* ==== BACK LINK ==== */
+.back-link {
+    display: inline-block;
+    margin-bottom: 28px;
+    color: #2563eb;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.08rem;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+/* ==== CTA ==== */
+.cta {
+    background: linear-gradient(90deg, #2563eb 0%, #007bff 100%);
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+    border-radius: 18px;
+    margin: 48px auto 0 auto;
+    max-width: 900px;
+    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+}
+
+.cta h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.cta p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.cta .btn-primary {
+    background: #fff;
+    color: #2563eb;
+    padding: 0.7em 2em;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.08rem;
+    border: none;
+    box-shadow: 0 2px 8px rgba(37,99,235,0.08);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    text-decoration: none;
+}
+
+.cta .btn-primary:hover {
+    background: #e3f2fd;
+    color: #007bff;
+}
+
+/* Footer Styles */
+.footer {
+    background-color:  #2c3e50;
+    color: #fff;
+    padding: 40px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+}
+
+.footer-logo {
+    flex: 1 1 200px;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.footer-links,
+.contact-links,
+.social-links {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-links a,
+.contact-links a,
+.social-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover,
+.contact-links a:hover,
+.social-links a:hover {
+     color: #007bff;
+}
+
+.social-links {
+    flex-direction: row;
+    gap: 15px;
+    justify-content: center;
+}
+
+.footer p {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 15px;
+}
+
+/* ==== RESPONSIVE DESIGN ==== */
+@media (max-width: 900px) {
+    .content {
+        max-width: 98vw;
+        padding: 0 8px;
+    }
+    .section-card {
+        padding: 22px 12px;
+    }
+    .footer {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        padding: 32px 8px;
+    }
+    .footer-links,
+    .contact-links,
+    .social-links {
+        align-items: center;
+    }
+    .cta {
+        max-width: 98vw;
+        padding: 1.2rem 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero {
+        height: 180px;
+        padding: 16px 4px;
+        font-size: 1.2rem;
+        border-radius: 0 0 18px 18px;
+    }
+    .content {
+        padding: 0 4px;
+    }
+    .section-card {
+        padding: 12px 6px;
+        font-size: 0.98rem;
+    }
+    .cta {
+        padding: 1rem 0;
+        border-radius: 12px;
+    }
+    .footer {
+        padding: 18px 4px;
+        border-radius: 0 0 12px 12px;
+    }
+    .footer-logo {
+        font-size: 20px;
+    }}

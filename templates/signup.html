@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Notes2Quiz</title>
+      <link rel="stylesheet" href="\static\css\signup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">Notes2Quiz</div>
+        <div class="subtext">Create your account to get started</div>
+
+        <!-- Added ID for JavaScript -->
+        <form id="signupForm" action="/signup" method="POST">
+            <!-- Added name field -->
+            <input type="text" id="name" name="name" placeholder="Your full name" required>
+            <input type="email" id="email" name="email" placeholder="Your email address" required>
+            <input type="password" id="password" name="password" placeholder="Your password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <!-- Added message container for feedback -->
+        <div id="message" style="margin-top:10px; color:red;"></div>
+
+        <div class="link">Already have an account? <a href="login.html">Sign in</a></div>
+        <div class="terms">
+            By clicking continue, you agree to our 
+            <a href="#">Terms of Service</a> and 
+            <a href="#">Privacy Policy</a>.
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
+
+            let res = await fetch("/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, password })
+            });
+
+            let data = await res.json();
+            document.getElementById("message").innerText = data.message;
+
+            if (data.success) {
+                window.location.href = "/dashboard";
+
+            }
+        });
+    </script>
+</body>
+</html>

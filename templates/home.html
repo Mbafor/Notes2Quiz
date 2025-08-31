@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes2Quiz - Learn Smarter</title>
+<link rel="stylesheet" href="/static/css/home.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container nav-container">
+          <h1 class="logo">Notes2Quiz</h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="index.html">Take Quiz</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h2>Turn Your Notes Into Fun Quizzes</h2>
+                <p>Upload your study notes, get instant quizzes, track your progress, and boost your memory — all in one platform.</p>
+                <a href="index.html" class="btn-primary">Get Started</a>
+            </div>
+            <div class="hero-image">
+                <!-- Replace with your preferred image -->
+                <img src="/static/Images/study.jpg" alt="Study Image">
+            </div>
+        </div>
+    </section>
+
+   <!-- FEATURES SECTION -->
+    <section id="features" class="features">
+        <h2>Why Choose Notes2Quiz?</h2>
+        <div class="feature-cards">
+              <a href="instant-quiz.html" class="feature-card">
+                  <img src="/static/Images/quiz.png" alt="Quiz Icon">
+                <h3>Instant Quiz Creation</h3>
+                <p>Turn your notes into interactive quizzes within seconds using AI-powered generation.</p>
+                   <span class="learn-more">Learn more →</span>
+            </a>
+                   <a href="instant-feedback.html" class="feature-card">
+                  <img src="/static/Images/feedback.png" alt="Instant Icon">
+                <h3>Instant Feedback with Explanations</h3>
+                <p>Learn from your mistakes with clear solutions for every question.</p>
+                   <span class="learn-more">Learn more →</span>
+            </a>
+             <a href="track.html" class="feature-card">
+                 <img src="/static/Images/track.png" alt="Track Icon">
+                <h3>Track Your Progress</h3>
+                <p>See your scores over time and identify topics you need to improve on.</p>
+                   <span class="learn-more">Learn more →</span>
+            </a>
+            <a href="flash-card.html" class="feature-card">
+                  <img src="/static/Images/flash-cards.png" alt="Study Icon">
+                <h3>Flashcard Study Mode</h3>
+                <p>Switch to flashcard view to test yourself and strengthen recall.</p>
+                   <span class="learn-more">Learn more →</span>
+            </a>
+            <a href="collaborate.html" class="feature-card">
+                 <img src="/static/Images/collaboration.png" alt="Collaboration Icon">
+                <h3>Collaborate with Classmates</h3>
+                <p>Share quizzes, challenge friends, and learn together.</p>
+                   <span class="learn-more">Learn more →</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Learn Smarter?</h2>
+            <p>Join thousands of students who use Notes2Quiz to boost their learning.</p>
+            <a href="signup.html" class="btn-primary">Sign Up for Free</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+
+        <footer class="footer">
+        <div class="footer-logo">Notes2Quiz</div>
+        <div class="footer-links">
+            <a href="home.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="contact-links">
+            <a href="mailto:mbaforfoghang@gmail.com">mbaforfoghang@gmail.com</a>
+            <a href="about.html">+237683094941|053494123</a>
+            <a href="https://wa.me/237683094941">Contact us on WhatsApp</a>
+        </div>
+        <div class="social-links">
+            <a href="#">Twitter</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Instagram</a>
+        </div>
+        <p>&copy; 2025 Notes2Quiz. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Intersection Observer for animations -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const cards = document.querySelectorAll(".feature-card");
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        cards.forEach(card => observer.observe(card));
+    });
+    </script>
+
+</body>
+</html>

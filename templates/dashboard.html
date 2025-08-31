@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container container">
+            <h1>📊 My Dashboard</h1>
+            <nav>
+                <a href="home.html">Home</a>
+                <a href="leaderboard.html">Leaderboard</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Stats -->
+        <section id="stats" class="card">
+            <h2>My Stats</h2>
+            <p>Total Quizzes: <span id="total-quizzes">0</span></p>
+            <p>Average Score: <span id="average-score">0</span></p>
+            <p>Best Score: <span id="best-score">0</span></p>
+        </section>
+
+        <!-- Progress Chart -->
+        <section class="card">
+            <h2>Progress Over Time</h2>
+            <canvas id="progressChart"></canvas>
+        </section>
+
+        <!-- Quiz History -->
+        <section id="history" class="card">
+            <h2>Recent Quizzes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Score</th>
+                        <th>Total Questions</th>
+                        <th>Date Taken</th>
+                        <th>Details</th>
+                        <th>Retry</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        <!-- Saved for Later -->
+        <section id="saved-later" class="card">
+            <h2>Saved for Later</h2>
+            <ul id="saved-list"></ul>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Quiz Details</h3>
+            <pre id="quizDetails"></pre>
+        </div>
+    </div>
+
+    <script>
+        // Fetch dashboard data
+        fetch("http://127.0.0.1:5000/dashboard", { credentials: "include" })
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    alert("Please log in to view your dashboard.");
+                    window.location.href = "login.html";
+                    return;
+                }
+
+                // Stats
+                document.getElementById("total-quizzes").innerText = data.total_quizzes;
+                document.getElementById("average-score").innerText = data.average_score;
+                document.getElementById("best-score").innerText = data.best_score;
+
+                // Quiz History
+                const tbody = document.querySelector("#history tbody");
+                const scores = [];
+                const labels = [];
+
+                data.history.forEach((q, idx) => {
+                    const fakeDate = new Date();
+                    fakeDate.setDate(fakeDate.getDate() - idx); // fake recent dates
+                    const dateStr = fakeDate.toLocaleDateString();
+
+                    scores.push(q.score);
+                    labels.push(dateStr);
+
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${q.score}</td>
+                            <td>${q.total}</td>
+                            <td>${dateStr}</td>
+                            <td><button class="details-btn">View</button></td>
+                            <td><a href="quiz.html?id=${idx}" class="btn-primary">Retry</a></td>
+                            <td><a href="/download_summary/${q.quiz_id}" class="btn-primary">Summary PDF</a></td>
+                            <td><a href="/download_quiz/${q.quiz_id}" class="btn-secondary">Quiz PDF</a></td>
+                        </tr>
+                    `;
+                });
+
+                // Chart
+                new Chart(document.getElementById("progressChart"), {
+                    type: "line",
+                    data: {
+                        labels: labels.reverse(),
+                        datasets: [{
+                            label: "Score",
+                            data: scores.reverse(),
+                            borderColor: "#007bff",
+                            backgroundColor: "rgba(0, 123, 255, 0.2)",
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    }
+                });
+
+                // Modal for details
+                const modal = document.getElementById("detailsModal");
+                const closeBtn = document.querySelector(".close-btn");
+                const detailBtns = document.querySelectorAll(".details-btn");
+
+                detailBtns.forEach((btn, i) => {
+                    btn.addEventListener("click", () => {
+                        document.getElementById("quizDetails").textContent =
+                            JSON.stringify(data.history[i].questions, null, 2);
+                        modal.style.display = "block";
+                    });
+                });
+
+                closeBtn.onclick = () => modal.style.display = "none";
+                window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
+
+                // Saved for later (from localStorage)
+                const savedList = document.getElementById("saved-list");
+                const savedQuizzes = JSON.parse(localStorage.getItem("savedQuizzes") || "[]");
+                savedQuizzes.forEach(title => {
+                    const li = document.createElement("li");
+                    li.textContent = title;
+                    savedList.appendChild(li);
+                });
+            })
+            .catch(err => console.error("Error loading dashboard:", err));
+    </script>
+</body>
+</html>

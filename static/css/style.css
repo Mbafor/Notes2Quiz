@@ -1,0 +1,359 @@
+/* ---------- Global Styles ---------- */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    color: #333;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: #2563eb;
+    transition: color 0.2s;
+}
+a:hover {
+    color: #1e40af;
+}
+.difficulty{
+  background-color: #1e40af;
+  color: white;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8em 2em;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.nav-left .logo {
+    font-weight: 700;
+    font-size: 1.4em;
+    color: #2c3e50;
+}
+
+.nav-right a {
+    margin-left: 20px;
+    font-size: 0.95em;
+    font-weight: 500;
+    color: #333;
+}
+.nav-right a:hover {
+    color: #007bff;
+}
+.nav-right .welcome {
+    margin-left: 15px;
+    font-size: 0.9em;
+      color: #2563eb;
+}
+
+/* Mobile menu toggle */
+.menu-toggle {
+    display: none;
+    font-size: 1.5em;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* ---------- Hero Section ---------- */
+.hero {
+    text-align: center;
+    padding: 3em 1em;
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    color: white;
+}
+.hero h1 {
+    font-size: 2.4em;
+    margin-bottom: 0.4em;
+}
+.hero p {
+    font-size: 1.1em;
+    max-width: 600px;
+    margin: auto;
+}
+
+/* ---------- Upload Box ---------- */
+.upload-box {
+    background: white;
+    max-width: 500px;
+    margin: 2em auto;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: center;
+    animation: fadeIn 0.4s ease-in-out;
+}
+.upload-box h2 {
+    margin-bottom: 1em;
+    color: #2563eb;
+}
+.upload-box label {
+    font-weight: 500;
+    display: block;
+    margin: 1em 0 0.4em;
+}
+.upload-box select, 
+.upload-box input[type="file"] {
+    width: 100%;
+    padding: 0.7em;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 1em;
+}
+.upload-box button {
+    background: #2563eb;
+    color: white;
+    padding: 0.8em 1.4em;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.2s, transform 0.1s;
+}
+.upload-box button:hover {
+    background: #1e40af;
+}
+.upload-box button:active {
+    transform: scale(0.97);
+}
+.summary {
+    margin-top: 1.2em;
+    padding: 1em;
+    background: #f0f4ff;
+    border-left: 4px solid #2563eb;
+    text-align: left;
+    font-size: 0.95em;
+    border-radius: 6px;
+}
+
+/* ---------- Quiz Page ---------- */
+.quiz-container {
+    max-width: 700px;
+    margin: 2em auto;
+    background: white;
+    border-radius: 10px;
+    padding: 2em;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Progress bar */
+.progress-bar {
+    background: #e0e7ff;
+    border-radius: 20px;
+    height: 10px;
+    margin-bottom: 1.5em;
+    overflow: hidden;
+}
+.progress {
+    background: #2563eb;
+    height: 100%;
+    width: 0;
+    transition: width 0.4s ease-in-out;
+}
+
+/* Question text */
+.quiz-box h2 {
+    font-size: 1.3em;
+    margin-bottom: 1em;
+}
+
+/* Options */
+.option-btn {
+    display: block;
+    width: 100%;
+    padding: 0.8em;
+    margin: 0.5em 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #f9fafb;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.1s;
+}
+.option-btn:hover {
+    background: #eef2ff;
+    border-color: #c7d2fe;
+}
+.option-btn:active {
+    transform: scale(0.97);
+}
+
+/* Correct / Wrong animations */
+.correct {
+    background: #d1fae5 !important;
+    border-color: #10b981 !important;
+    color: #065f46;
+    animation: pulseCorrect 0.5s ease;
+}
+.wrong {
+    background: #fee2e2 !important;
+    border-color: #ef4444 !important;
+    color: #991b1b;
+}
+/* --- Question transition animations --- */
+.fade-out {
+    animation: fadeOut 0.3s ease forwards;
+}
+.fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(5px); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Explannation */
+.explanation {
+    background-color: #f8f8f8;
+    border-left: 4px solid #4CAF50;
+    padding: 8px;
+    margin-top: 6px;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+
+/* Next button */
+#next-btn {
+    background: #2563eb;
+    color: white;
+    padding: 0.8em 1.4em;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 1em;
+    transition: background 0.2s, transform 0.1s;
+}
+#next-btn:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+#next-btn:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+/* Results */
+.results-box h2 {
+    color: #2563eb;
+}
+.review-item {
+    border-top: 1px solid #eee;
+    padding: 0.8em 0;
+}
+.review-item p {
+    margin: 0.2em 0;
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseCorrect {
+    0% { box-shadow: 0 0 0 0 rgba(16,185,129, 0.6); }
+    70% { box-shadow: 0 0 0 8px rgba(16,185,129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16,185,129, 0); }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+    .nav-right {
+        display: none;
+    }
+    .menu-toggle {
+        display: block;
+    }
+    .upload-box, .quiz-container {
+        margin: 1em;
+        padding: 1.5em;
+    }
+}
+
+
+
+/* Footer Styles */
+.footer {
+    background-color:  #2c3e50;
+    color: #fff;
+    padding: 40px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+}
+
+.footer-logo {
+    flex: 1 1 200px;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.footer-links,
+.contact-links,
+.social-links {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-links a,
+.contact-links a,
+.social-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover,
+.contact-links a:hover,
+.social-links a:hover {
+     color: #007bff;
+}
+
+.social-links {
+    flex-direction: row;
+    gap: 15px;
+    justify-content: center;
+}
+
+.footer p {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .footer-links,
+    .contact-links,
+    .social-links {
+        align-items: center;
+    }}

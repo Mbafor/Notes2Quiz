@@ -1,0 +1,231 @@
+/* ===== Quiz Page Styles ===== */
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.quiz-container {
+    background: #fff;
+    max-width: 700px;
+    width: 90%;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 40px 0;
+}
+
+/* Progress Bar */
+.progress-bar {
+    background: #e0e0e0;
+    border-radius: 20px;
+    height: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.progress {
+    background: #2563eb;
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Question Box */
+.quiz-box h2 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Option Buttons */
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.option-btn {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #f8f9fa;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: left;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.option-btn:hover {
+    background: #e9f0ff;
+    border-color: #2563eb;
+}
+
+/* Correct & Wrong States */
+.correct {
+    background: #d4f8d4 !important;
+    border-color: #28a745 !important;
+}
+
+.wrong {
+    background: #ffd4d4 !important;
+    border-color: #dc3545 !important;
+}
+
+/* Next Button */
+#next-btn {
+    background: #2563eb;
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
+#next-btn:disabled {
+    background: #a0aec0;
+    cursor: not-allowed;
+}
+
+#next-btn:hover:not(:disabled) {
+    background: #1e40af;
+}
+
+/* ===== Results Section Styling ===== */
+.results-box {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.results-box h2 {
+    font-size: 26px;
+    color: #2563eb;
+    margin-bottom: 15px;
+}
+
+#score-text {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #111827;
+}
+
+/* Review Items */
+.review-item {
+    background: #f9fafb;
+    border-left: 5px solid #2563eb;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 6px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.review-item p {
+    margin: 4px 0;
+}
+
+.correct {
+    color: #10b981; /* green */
+    font-weight: bold;
+}
+
+.wrong {
+    color: #ef4444; /* red */
+    font-weight: bold;
+}
+
+/* Results Buttons */
+.results-box button {
+    background: #2563eb;
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    margin: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.1s ease;
+}
+
+.results-box button:hover {
+    background: #1e40af;
+    transform: translateY(-2px);
+}
+
+.results-box button:active {
+    transform: translateY(0);
+}
+
+/* Second button styled differently */
+.results-box button:nth-of-type(2) {
+    background: #10b981;
+}
+
+.results-box button:nth-of-type(2):hover {
+    background: #059669;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Results action/button styles */
+.results-actions {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-cta {
+  background: transparent;
+  border: 2px dashed #2563eb;
+  color: #2563eb;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.save-cta {
+  margin-top: 12px;
+  text-align: center;
+  width: 100%;
+}

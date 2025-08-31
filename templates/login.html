@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Notes2Quiz</title>
+    <link rel="stylesheet" href="\static\css\login.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="logo">Notes2Quiz</div>
+        <div class="subtext">Sign in to your account</div>
+
+        <!-- Added id to the form -->
+        <form id="loginForm">
+            <input type="email" id="email" name="email" placeholder="Your email address" required>
+            <input type="password" id="password" name="password" placeholder="Your password" required>
+            <button type="submit">Sign In</button>
+        </form>
+
+        <div id="message" style="color: red; margin-top: 10px;"></div>
+
+        <div class="link">Don't have an account? <a href="signup.html">Sign up</a></div>
+        <div class="terms">
+            By clicking continue, you agree to our 
+            <a href="#">Terms of Service</a> and 
+            <a href="#">Privacy Policy</a>.
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async function(e) {
+            e.preventDefault(); // prevent default form submit
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            try {
+                let res = await fetch("/login", {
+                    method: "POST",
+                    credentials: "include", // allow session cookies
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+
+                let data = await res.json();
+                document.getElementById("message").innerText = data.message;
+
+                if (data.success) {
+                    window.location.href = "/dashboard";
+
+
+                }
+            } catch (err) {
+                console.error(err);
+                document.getElementById("message").innerText = "Login request failed.";
+            }
+        });
+    </script>
+</body>
+</html>

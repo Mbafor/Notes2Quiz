@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizGen AI</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="nav-left">
+            <a href="home.html" class="logo">Notes2Quiz</a>
+        </div>
+        <div class="nav-right">
+            <a href="home.html">Home</a>
+            <a href="index.html">Upload Notes</a>
+            <a href="signup.html">Sign Up</a>
+            <a href="login.html">Login</a>
+            <span class="welcome">Welcome!</span>
+        </div>
+        <button class="menu-toggle" aria-label="Open menu">&#9776;</button>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>Turn Your Notes into Quizzes</h1>
+        <p>Upload your study notes and instantly generate quizzes to test your knowledge.</p>
+    </section>
+
+    <!-- Upload Section -->
+    <div class="upload-box">
+        <h2>Upload Your Study Notes</h2>
+        
+        <!-- Difficulty selection -->
+        <label for="difficulty">Select Difficulty:</label>
+        <select id="difficulty">
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+        </select>
+
+        <!-- File upload -->
+        <input type="file" id="fileInput" accept=".pdf,.docx,.txt">
+        <br>
+        <button id="uploadBtn">Upload & Start Quiz</button>
+
+        <!-- Summary preview -->
+        <div class="summary" id="summaryBox" style="display:none;"></div>
+    </div>
+
+    <script>
+    document.getElementById("uploadBtn").addEventListener("click", function() {
+        const file = document.getElementById('fileInput').files[0];
+        const difficulty = document.getElementById('difficulty').value;
+
+        if (!file) {
+            alert("Please select a file.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        fetch("/upload", { method: "POST", body: formData })
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
+
+            document.getElementById("summaryBox").style.display = "block";
+            document.getElementById("summaryBox").innerText = data.summary;
+
+            // Save data for quiz page
+            localStorage.setItem("quiz_summary", data.summary);
+            localStorage.setItem("quiz_difficulty", difficulty);
+
+            // Redirect after short delay
+            setTimeout(() => {
+                window.location.href = "/quiz_page";
+            }, 1500);
+        })
+        .catch(err => console.error(err));
+    });
+    </script>
+
+
+
+
+ <!-- FOOTER -->
+
+        <footer class="footer">
+        <div class="footer-logo">Notes2Quiz</div>
+        <div class="footer-links">
+            <a href="home.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="contact-links">
+            <a href="mailto:mbaforfoghang@gmail.com">mbaforfoghang@gmail.com</a>
+            <a href="about.html">+237683094941|053494123</a>
+            <a href="https://wa.me/237683094941">Contact us on WhatsApp</a>
+        </div>
+        <div class="social-links">
+            <a href="#">Twitter</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Instagram</a>
+        </div>
+        <p>&copy; 2025 Notes2Quiz. All Rights Reserved.</p>
+    </footer>
+    
+</body>
+</html>

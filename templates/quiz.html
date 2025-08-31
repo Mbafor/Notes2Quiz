@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="progress-bar"><div class="progress" id="progress"></div></div>
+        
+        <div class="quiz-box">
+            <h2 id="question"></h2>
+            <div class="options" id="options"></div>
+            <button id="next-btn" disabled>Next</button>
+        </div>
+
+        <div id="results-box" class="results-box" style="display:none;">
+            <h2>Quiz Results</h2>
+            <p id="score-text"></p>
+            <div id="review"></div>
+            <div class="results-actions">
+                <button class="btn-primary" onclick="window.location.href='home.html'">Back to Home</button>
+                <button class="btn-secondary" onclick="goToFlashcards()">Study with Flashcards</button>
+            </div>
+            <div class="download-buttons">
+               <a href="/download_summary/{{ quiz_id }}" class="btn-primary">Download Summary</a>
+               <a href="/download_quiz/{{ quiz_id }}" class="btn-secondary">Download Quiz & Answers</a>
+        </div>
+
+            <div class="save-cta">
+                <button class="btn-cta" onclick="promptSignup()">Save This Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let questions = [];
+        let currentQuestion = 0;
+        let score = 0;
+
+        const questionEl = document.getElementById("question");
+        const optionsEl = document.getElementById("options");
+        const nextBtn = document.getElementById("next-btn");
+        const progressEl = document.getElementById("progress");
+        const resultsBox = document.getElementById("results-box");
+        const scoreText = document.getElementById("score-text");
+        const reviewEl = document.getElementById("review");
+
+        async function fetchQuestions() {
+            try {
+                const res = await fetch("/api/quiz");
+                const data = await res.json();
+                questions = data.questions || [];
+                loadQuestion();
+            } catch (err) {
+                console.error("Error fetching quiz:", err);
+                questionEl.textContent = "Failed to load quiz questions.";
+            }
+        }
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            questionEl.textContent = q.question;
+            optionsEl.innerHTML = "";
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement("button");
+                btn.textContent = opt;
+                btn.className = "option-btn";
+                btn.onclick = () => selectAnswer(index);
+                optionsEl.appendChild(btn);
+            });
+            nextBtn.disabled = true;
+            updateProgress();
+        }
+
+        function selectAnswer(index) {
+            const q = questions[currentQuestion];
+            const buttons = optionsEl.querySelectorAll(".option-btn");
+
+            buttons.forEach((btn, i) => {
+                btn.disabled = true;
+                if (i === q.answer) {
+                    btn.classList.add("correct");
+                }
+                if (i === index && i !== q.answer) {
+                    btn.classList.add("wrong");
+                }
+            });
+
+            const explanationNode = document.createElement("div");
+            explanationNode.className = "inline-explanation";
+            explanationNode.textContent = q.explanation;
+            optionsEl.appendChild(explanationNode);
+
+            if (index === q.answer) score++;
+            nextBtn.disabled = false;
+        }
+
+        function updateProgress() {
+            progressEl.style.width = `${((currentQuestion) / questions.length) * 100}%`;
+        }
+
+        nextBtn.addEventListener("click", () => {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        function showResults() {
+            document.querySelector(".quiz-box").style.display = "none";
+            resultsBox.style.display = "block";
+            scoreText.textContent = `You scored ${score} out of ${questions.length}`;
+            reviewEl.innerHTML = "";
+            questions.forEach((q, i) => {
+                const div = document.createElement("div");
+                div.className = "review-item";
+                div.innerHTML = `<p><strong>Q${i+1}:</strong> ${q.question}</p>
+                                 <p class="correct">Correct Answer: ${q.options[q.answer]}</p>
+                                 <p>Explanation: ${q.explanation}</p>`;
+                reviewEl.appendChild(div);
+            });
+        }
+
+        function goToFlashcards() {
+            window.location.href = "flashcards.html";
+        }
+
+        function promptSignup() {
+            alert("Create an account to save your quiz!");
+        }
+
+        fetchQuestions();
+    </script>
+</body>
+</html>
